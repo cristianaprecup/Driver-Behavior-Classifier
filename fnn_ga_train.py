@@ -10,34 +10,6 @@ from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.optimizers import Adam
 import tensorflow as tf
 
-
-# This script uses a Genetic Algorithm (GA) to search for the optimal architecture
-# of a Feedforward Neural Network (FNN) for classifying driving behavior based on
-# telemetry data (accelerometer and gyroscope readings).
-
-# The goal is to evolve network architectures (i.e., number of neurons in each hidden layer)
-# to maximize classification accuracy on a validation dataset.
-
-# Key components:
-# - Loads and preprocesses the driving telemetry dataset.
-# - Defines individuals as lists representing neural network architectures:
-#   e.g., [64, 32] means 2 hidden layers with 64 and 32 neurons respectively.
-# - Uses DEAP (Distributed Evolutionary Algorithms in Python) to implement the GA.
-# - Defines a fitness function that builds and trains a Keras neural network for each individual,
-#   then evaluates its accuracy on validation data.
-# - Runs the GA to evolve better architectures over several generations.
-# - Prints the best-performing architecture at the end.
-
-# This script combines two core topics of the course:
-# 1. Neural Networks — the actual classifiers being optimized.
-# 2. Genetic Algorithms — the search strategy to find optimal NN configurations.
-
-# Technologies used:
-# - Pandas, NumPy (data handling)
-# - scikit-learn (scaling and train/test split)
-# - TensorFlow / Keras (neural network modeling)
-# - DEAP (genetic algorithm framework)
-
 df = pd.read_csv("dataset/3_FinalDatasetCsv.csv")
 X = df[["Acc X", "Acc Y", "Acc Z", "gyro_x", "gyro_y", "gyro_z"]]
 y = to_categorical(df["label"], num_classes=3)
